@@ -14,6 +14,7 @@
 #import "UIImage+MWPhotoBrowser.h"
 #import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "KIPlayerViewController.h"
 
 #define PADDING                  10
 
@@ -1228,13 +1229,14 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 - (void)_playVideo:(NSURL *)videoURL atPhotoIndex:(NSUInteger)index {
 
     // Setup player
-    _currentVideoPlayerViewController = [AVPlayerViewController alloc];
+    _currentVideoPlayerViewController = [KIPlayerViewController new];
     AVPlayer *player = [AVPlayer playerWithURL:videoURL];
     _currentVideoPlayerViewController.player = player;
     _currentVideoPlayerViewController.showsPlaybackControls = YES;
     [self presentViewController:_currentVideoPlayerViewController animated:YES completion:^{
         [[_currentVideoPlayerViewController player] play];
     }];
+    
 //    [_currentVideoPlayerViewController.moviePlayer prepareToPlay];
 //    _currentVideoPlayerViewController.moviePlayer.shouldAutoplay = YES;
 //    _currentVideoPlayerViewController.moviePlayer.scalingMode = MPMovieScalingModeAspectFit;
@@ -1675,5 +1677,6 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     }
     self.navigationController.navigationBar.userInteractionEnabled = YES;
 }
+
 
 @end
